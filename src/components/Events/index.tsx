@@ -5,7 +5,7 @@ function Events() {
   return (
     <div className="mx-auto max-w-screen-2xl p-5">
       <h1 className="text my-14 text-center text-6xl font-bold ">Events</h1>
-      <div className="lg:grid-clos-3  grid grid-cols-1 gap-5 space-y-5 md:grid-cols-2  md:gap-10 2xl:grid-cols-3">
+      <div className="lg:grid-clos-3  grid grid-cols-1 items-center gap-5 md:grid-cols-2  md:gap-10 2xl:grid-cols-3">
         {data.map(
           ({
             title,
@@ -42,7 +42,8 @@ const data = [
       "A tech conference that features industry leaders, startups and investors",
     date: "November 5th, 2020",
     location: "San Francisco, CA",
-    image: "https://techfair.com/images/tech_fair_banner.jpg",
+    image:
+      "https://img.freepik.com/free-vector/music-event-poster-template-with-abstract-shapes_1361-1316.jpg?w=2000",
     link: "https://techfair.com",
     registrationFee: 25.0,
   },
@@ -52,7 +53,8 @@ const data = [
       "A celebration of the arts featuring local and international artists",
     date: "September 18th, 2020",
     location: "Los Angeles, CA",
-    image: "https://artfestival.com/images/art_festival_banner.jpg",
+    image:
+      "https://i.pinimg.com/736x/77/97/f8/7797f801a5730f8dbc56fca8617d469b.jpg",
     link: "https://artfestival.com",
     registrationFee: 0.0,
   },
@@ -71,7 +73,7 @@ const data = [
     date: "October 10th, 2020",
     location: "Las Vegas, NV",
     image:
-      "https://rockclimbingcomp.com/images/rock_climbing_competition_banner.jpg",
+      "https://www.shutterstock.com/image-vector/memphis-event-banner-design-assorted-260nw-2125395389.jpg",
     link: "https://rockclimbingcomp.com",
     registrationFee: 50.0,
   },
@@ -81,7 +83,8 @@ const data = [
       "A screening of classic movies in a local park for families and friends",
     date: "Every Saturday",
     location: "Chicago, IL",
-    image: "https://summermovienight.com/images/summer_movie_night_banner.jpg",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFi2WmviD4CP-a_u80ACOhc28J-zKxQH686w&usqp=CAU",
     link: "https://summermovienight.com",
     registrationFee: 0,
   },
@@ -91,7 +94,7 @@ const data = [
       "A tournament for golfers of all skill levels to compete for prizes",
     date: "August 1st, 2020",
     location: "Miami, FL",
-    image: "https://golftournament.com/images/golf_tournament_banner.jpg",
+    image: "https://s3.envato.com/files/304428680/prevnex.jpg",
     link: "https://golftournament.com",
     registrationFee: 100.0,
   },
