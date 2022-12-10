@@ -6,7 +6,7 @@ import { trpc } from "../utils/trpc";
 
 import "../styles/globals.css";
 import NavBar from "../components/NavBar";
-import { DarkLightContext } from "../../context/DarkModeContext";
+import { DarkLightContext } from "../context/DarkModeContext";
 import { useEffect, useState } from "react";
 
 const MyApp: AppType<{ session: Session | null }> = ({
