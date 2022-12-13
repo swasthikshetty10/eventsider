@@ -4,33 +4,45 @@ import { BsFillCalendarFill } from "react-icons/bs";
 import { Button, Card } from "flowbite-react";
 import Image from "next/image";
 import EventsModal from "../../components/Modal/EventsModal";
+import { useRouter } from "next/router";
+import { trpc } from "../../utils/trpc";
+
 export default function Events() {
   const [modal, showModal] = useState(false);
+  const router = useRouter();
+  const { id } = router.query;
+  const event = trpc.events.getEventById.useQuery({ id: Number(id) || -1 });
+  if (event.isLoading) return <div>Loading...</div>;
+  if (!event.data) {
+    router.push({
+      pathname: "/404",
+    });
+    return null;
+  }
+
   return (
     <div>
       <section className="min-h-screen pt-20">
         <div className="mx-auto grid max-w-screen-xl gap-10 px-4 py-8 lg:grid-cols-12 lg:gap-8 lg:py-16 xl:gap-0">
           <div className="mr-auto justify-between place-self-center  lg:col-span-7">
             <h1 className="dark: mb-4 max-w-2xl text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl">
-              Summer Music Festival
+              {event.data.title}
             </h1>
             <p className="mb-6 max-w-2xl font-light text-gray-500 dark:text-gray-400 md:text-lg lg:mb-8 lg:text-xl">
-              Spend the day enjoying live music and delicious food at the Summer
-              Music Festival. With a variety of different bands, food vendors,
-              and activities,
+              {event.data.description}
             </p>
             <div>
               <a
                 href="#"
                 className="bg-primary-700 hover:bg-primary-800text-xl  mr-3 inline-flex items-center  justify-center gap-1 rounded-lg px-5 py-3 text-center text-base font-medium  text-opacity-75 focus:ring-4"
               >
-                <HiOutlineLocationMarker /> Central Park, New York City
+                <HiOutlineLocationMarker /> {event.data.location}
               </a>
               <a
                 href="#"
                 className="bg-primary-700 hover:bg-primary-800text-xl  mr-3 inline-flex items-center  justify-center gap-1 rounded-lg px-5 py-3 text-center text-base font-medium  text-opacity-75 focus:ring-4"
               >
-                <BsFillCalendarFill /> 11:00am - 7:00pm, Saturday June 20th
+                <BsFillCalendarFill /> {event.data.date.getUTCDay()}
               </a>
             </div>
           </div>
@@ -39,7 +51,7 @@ export default function Events() {
             <Image
               height={500}
               width={500}
-              src="https://images.pexels.com/photos/2747449/pexels-photo-2747449.jpeg?cs=srgb&dl=pexels-wolfgang-2747449.jpg&fm=jpg"
+              src={event.data.banner}
               alt="mockup"
             />
           </div>
@@ -47,7 +59,10 @@ export default function Events() {
         <div className="mt-10 flex w-full  items-center justify-center gap-5">
           <div>
             <a className=" text-lg font-semibold">
-              Starting at <span className="text-2xl md:text-4xl">₹250</span>
+              Starting at{" "}
+              <span className="text-2xl md:text-4xl">
+                ₹{event.data.registrationFee}
+              </span>
             </a>
           </div>
           <Button

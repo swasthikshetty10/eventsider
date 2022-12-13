@@ -1,15 +1,17 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 function Card(props: any) {
   return (
     <div className=" flex h-full flex-col items-center justify-between rounded-lg bg-slate-200/60 shadow-md  backdrop-blur-lg transition delay-75 duration-300 ease-in-out hover:scale-105 hover:shadow-2xl dark:border-gray-400 dark:bg-gray-700/60">
       <a href=" mx-auto ">
+        & event.isLoading === false
         <Image
           height={300}
           width={300}
           className="h-full max-h-[300px] w-full rounded-t-lg p-2"
-          src={props.image}
+          src={props.banner}
           alt="product image"
         />
       </a>
@@ -21,7 +23,7 @@ function Card(props: any) {
         </a>
         <p>
           <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            {props.date}
+            {props.date.toString()}
           </span>
         </p>
         <p className="mt-2 text-gray-600 dark:text-gray-400">
@@ -37,12 +39,14 @@ function Card(props: any) {
           <span className="text-3xl font-bold text-gray-900 dark:text-white">
             {props.price}
           </span>
-          <a
-            href="#"
+
+          <Link
+            href="/event/[id]"
+            as={`/event/${props.id}`}
             className="rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Buy Tickets
-          </a>
+          </Link>
         </div>
       </div>
     </div>

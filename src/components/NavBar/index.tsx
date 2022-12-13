@@ -1,10 +1,15 @@
 import { Avatar, Button, Dropdown, Navbar } from "flowbite-react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { DarkLightContext } from "../../context/DarkModeContext";
 import { FiSun, FiMoon } from "react-icons/fi";
 import Image from "next/image";
+import { trpc } from "../../utils/trpc";
+import { FcGoogle } from "react-icons/fc";
+import { signIn, signOut } from "next-auth/react";
 function NavBAr() {
   const [dark, setDark] = useContext(DarkLightContext);
+  const user = trpc.auth.getUserData.useQuery();
+
   return (
     <Navbar
       className="group fixed top-0 left-0  z-[999]  w-full bg-opacity-30 backdrop-blur-lg  dark:bg-gray-900 dark:bg-opacity-70 dark:backdrop-blur-lg"
@@ -24,29 +29,50 @@ function NavBAr() {
         </span>
       </Navbar.Brand>
       <div className="flex items-center gap-2 md:order-2">
-        <Dropdown
-          arrowIcon={false}
-          inline={true}
-          label={
-            <Avatar
-              alt="User settings"
-              img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-              rounded={true}
-            />
-          }
-        >
-          <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
-            <span className="block truncate text-sm font-medium">
-              name@flowbite.com
+        {user.data ? (
+          <Dropdown
+            arrowIcon={false}
+            inline={true}
+            label={
+              <Avatar
+                alt="User settings"
+                img={user.data?.image || undefined}
+                rounded={true}
+              />
+            }
+          >
+            <Dropdown.Header>
+              <span className="block  font-medium">{user.data.name}</span>
+              <span className="block truncate text-sm font-light">
+                {user.data?.email || ""}
+              </span>
+            </Dropdown.Header>
+            <Dropdown.Item>My Tickets</Dropdown.Item>
+            <Dropdown.Item>Settings</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item
+              onClick={async () => {
+                await signOut({ redirect: false });
+                user.refetch();
+              }}
+            >
+              Sign out
+            </Dropdown.Item>
+          </Dropdown>
+        ) : (
+          <Button
+            onClick={() => {
+              signIn("google");
+            }}
+            className=""
+            color="gray"
+          >
+            <span className="text-mds flex items-center gap-1">
+              <FcGoogle /> SignIn
             </span>
-          </Dropdown.Header>
-          <Dropdown.Item>Dashboard</Dropdown.Item>
-          <Dropdown.Item>Settings</Dropdown.Item>
-          <Dropdown.Item>Earnings</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
-        </Dropdown>
+          </Button>
+        )}
+
         <button
           className="p-2 text-3xl text-yellow-300 dark:text-white "
           onClick={() => setDark(!dark)}
