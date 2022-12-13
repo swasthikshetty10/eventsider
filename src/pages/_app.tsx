@@ -21,16 +21,17 @@ const MyApp: AppType<{ session: Session | null }> = ({
       setDark(false);
     }
   }, []);
+  useEffect(() => {
+    document.body.className = `${
+      dark
+        ? "dark bg-gradient-to-br from-gray-800 via-slate-800 to-slate-900  text-gray-200 "
+        : " bg-gradient-to-br from-pink-100 via-blue-50 to-sky-100 text-gray-800 "
+    } font-sans`;
+  }, [dark]);
   return (
     <SessionProvider session={session}>
       <DarkLightContext.Provider value={[dark, setDark]}>
-        <div
-          className={`${
-            dark
-              ? "dark bg-gradient-to-br from-gray-800 via-slate-800 to-slate-900  text-gray-200 "
-              : " bg-gradient-to-br from-pink-100 via-blue-50 to-sky-100 text-gray-800 "
-          }`}
-        >
+        <div>
           <NavBar />
           <Component {...pageProps} />
         </div>
