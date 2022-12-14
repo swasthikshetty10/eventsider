@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Button, Modal } from "flowbite-react";
+import { Button } from "flowbite-react";
 import { makePayment } from "../../utils/razorpay";
 
 function EventsModal({ showModal, modal, id, fee }: any) {

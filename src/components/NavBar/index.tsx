@@ -1,5 +1,5 @@
 import { Avatar, Button, Dropdown, Navbar } from "flowbite-react";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { DarkLightContext } from "../../context/DarkModeContext";
 import { FiSun, FiMoon } from "react-icons/fi";
 import Image from "next/image";

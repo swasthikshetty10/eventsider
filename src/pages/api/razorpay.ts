@@ -40,10 +40,25 @@ export default async function handler(
       receipt: shortid.generate(),
       payment_capture,
     };
-
+    if (!userData || !eventData)
+      return res.status(400).send({ message: "User or Event not found" });
     try {
       const response = await razorpay.orders.create(options);
-
+      const paymentOrder = await prisma.paymentOrder.create({
+        data: {
+          orderId: response.id as string,
+          user: {
+            connect: {
+              id: userData?.id,
+            },
+          },
+          event: {
+            connect: {
+              id: eventId,
+            },
+          },
+        },
+      });
       return res.status(200).json({
         id: response.id,
         currency: response.currency,
@@ -51,13 +66,11 @@ export default async function handler(
         name: userData?.name,
         email: userData?.email,
       });
-
-      //   return res.status(401).json({
-      //     message: "No Permission",
-      //   });
     } catch (err) {
       console.log(err);
       return res.status(400).json(err);
     }
+  } else {
+    return res.status(401).send({ message: "Unauthorized" });
   }
 }
