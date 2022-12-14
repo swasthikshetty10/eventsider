@@ -6,7 +6,6 @@ function Card(props: any) {
   return (
     <div className=" flex h-full flex-col items-center justify-between rounded-lg bg-slate-200/60 shadow-md  backdrop-blur-lg transition delay-75 duration-300 ease-in-out hover:scale-105 hover:shadow-2xl dark:border-gray-400 dark:bg-gray-700/60">
       <a href=" mx-auto ">
-        & event.isLoading === false
         <Image
           height={300}
           width={300}

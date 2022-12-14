@@ -6,17 +6,18 @@ import Image from "next/image";
 import { trpc } from "../../utils/trpc";
 import { FcGoogle } from "react-icons/fc";
 import { signIn, signOut } from "next-auth/react";
+import Link from "next/link";
 function NavBAr() {
   const [dark, setDark] = useContext(DarkLightContext);
   const user = trpc.auth.getUserData.useQuery();
-
+  const utils = trpc.useContext();
   return (
     <Navbar
       className="group fixed top-0 left-0  z-[999]  w-full bg-opacity-30 backdrop-blur-lg  dark:bg-gray-900 dark:bg-opacity-70 dark:backdrop-blur-lg"
       fluid={true}
       rounded={true}
     >
-      <Navbar.Brand href="https://flowbite.com/">
+      <Link href="/" className="flex items-center gap-2 text-xl font-bold">
         <Image
           src="/images/logo.svg"
           width={100}
@@ -24,10 +25,10 @@ function NavBAr() {
           className="h-10 w-10 group-hover:animate-pulse lg:h-12 lg:w-12"
           alt="Eventsider Logo"
         />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+        <span className="self-center whitespace-nowrap   dark:text-white">
           Eventsider
         </span>
-      </Navbar.Brand>
+      </Link>
       <div className="flex items-center gap-2 md:order-2">
         {user.data ? (
           <Dropdown
@@ -52,8 +53,8 @@ function NavBAr() {
             <Dropdown.Divider />
             <Dropdown.Item
               onClick={async () => {
-                await signOut({ redirect: false });
-                user.refetch();
+                await signOut({ redirect: true });
+                utils.auth.getUserData.invalidate();
               }}
             >
               Sign out
@@ -62,7 +63,9 @@ function NavBAr() {
         ) : (
           <Button
             onClick={() => {
-              signIn("google");
+              signIn("google", {
+                callbackUrl: `${window.location.pathname}/profile`,
+              });
             }}
             className=""
             color="gray"
@@ -82,13 +85,11 @@ function NavBAr() {
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <Navbar.Link href="/navbars" active={true}>
-          Home
-        </Navbar.Link>
-        <Navbar.Link href="/navbars">About</Navbar.Link>
-        <Navbar.Link href="/navbars">Services</Navbar.Link>
-        <Navbar.Link href="/navbars">Pricing</Navbar.Link>
-        <Navbar.Link href="/navbars">Contact</Navbar.Link>
+        <Link href="/">Home</Link>
+        <Link href="/events">Events</Link>
+        <Link href="/about">About</Link>
+        <Link href="/tickets">Tickets</Link>
+        <Link href="/offers">Offers</Link>
       </Navbar.Collapse>
     </Navbar>
   );

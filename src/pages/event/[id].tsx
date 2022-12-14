@@ -81,7 +81,12 @@ export default function Events() {
         </div>
       </section>
 
-      <EventsModal showModal={showModal} modal={modal} />
+      <EventsModal
+        id={event.data.id}
+        fee={event.data.registrationFee}
+        showModal={showModal}
+        modal={modal}
+      />
     </div>
   );
 }

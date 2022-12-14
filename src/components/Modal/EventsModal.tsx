@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import { Button, Modal } from "flowbite-react";
+import { makePayment } from "../../utils/razorpay";
 
-function EventsModal({ showModal, modal }: any) {
+function EventsModal({ showModal, modal, id, fee }: any) {
   useEffect(() => {
     if (modal) {
       // disable scroll for page
     }
   }, [modal]);
+  const [tnc, setTnc] = React.useState(false);
   return modal ? (
     <div className="fixed top-0 right-0 left-0 z-50 flex h-screen w-screen items-center justify-center overflow-y-auto overflow-x-hidden bg-gray-900 bg-opacity-50 p-5 dark:bg-opacity-80">
       <div className="relative z-[9999] max-w-xl rounded-xl bg-white  shadow-lg dark:bg-gray-700">
@@ -86,17 +88,47 @@ function EventsModal({ showModal, modal }: any) {
             </div>
           </div>
         </div>
-        <div className="p-5">
-          <div className="flex gap-3">
-            <Button className="">Buy Ticket</Button>
-            <Button
-              onClick={() => {
-                showModal(false);
-              }}
-              color="gray"
-            >
-              Cancel
-            </Button>
+        <div className="space-3 p-5">
+          <div>
+            <div className="flex items-center justify-between ">
+              <div className="flex items-center gap-2">
+                <input
+                  checked={tnc}
+                  onChange={(e) => {
+                    setTnc(e.target.checked);
+                  }}
+                  type="checkbox"
+                  className="h-4 w-4"
+                />
+                <span className="text-gray-500  dark:text-gray-400">
+                  I agree to the terms and conditions
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-between ">
+            <div className="flex items-center gap-1">
+              <span className="text-md  ">Total fees </span>
+              <span className="text-2xl font-bold"> ₹{fee}</span>
+            </div>
+            <div className="flex gap-3">
+              <Button
+                onClick={() => {
+                  makePayment(id);
+                }}
+                disabled={!tnc}
+              >
+                Pay Now
+              </Button>
+              <Button
+                onClick={() => {
+                  showModal(false);
+                }}
+                color="gray"
+              >
+                Cancel
+              </Button>
+            </div>
           </div>
         </div>
       </div>

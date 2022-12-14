@@ -29,14 +29,14 @@ const MyApp: AppType<{ session: Session | null }> = ({
     } font-sans`;
   }, [dark]);
   return (
-    <SessionProvider session={session}>
-      <DarkLightContext.Provider value={[dark, setDark]}>
+    <DarkLightContext.Provider value={[dark, setDark]}>
+      <SessionProvider session={session}>
         <div>
           <NavBar />
           <Component {...pageProps} />
         </div>
-      </DarkLightContext.Provider>
-    </SessionProvider>
+      </SessionProvider>
+    </DarkLightContext.Provider>
   );
 };
 
