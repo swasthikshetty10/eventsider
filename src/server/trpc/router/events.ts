@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { router, publicProcedure } from "../trpc";
+import { router, publicProcedure, protectedProcedure } from "../trpc";
 
 export const eventsRouter = router({
   getAllEvents: publicProcedure.query(({ ctx }) => {
@@ -19,4 +19,15 @@ export const eventsRouter = router({
         },
       });
     }),
+  getRegisteredEvents: protectedProcedure.query(async ({ ctx }) => {
+    const registered = await ctx.prisma.registered.findMany({
+      where: {
+        userId: ctx.session?.user.id,
+      },
+      include: {
+        event: true,
+      },
+    });
+    return registered.map((r) => ({ regId: r.id, ...r.event }));
+  }),
 });

@@ -38,7 +38,6 @@ export const makePayment = async (eventId: number) => {
     image: "/images/logo.svg",
     handler: function (response: any) {
       Router.push("/profile");
-      alert(response.razorpay_payment_id);
     },
     prefill: {
       email: data.email,

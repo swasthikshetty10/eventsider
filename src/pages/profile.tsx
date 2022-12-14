@@ -4,12 +4,16 @@ import Image from "next/image";
 import React from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { trpc } from "../utils/trpc";
+import QRCode from "react-qr-code";
+import Link from "next/link";
 function Profiles() {
   const user = trpc.auth.getUserData.useQuery();
   const utils = trpc.useContext();
-  if (!user.data) {
+  const events = trpc.events.getRegisteredEvents.useQuery();
+  if (!user.data || !events.data) {
     return <div>loading</div>;
   }
+  console.log(events.data);
   return (
     <div className="flex min-h-screen flex-col items-center justify-start gap-5 p-5 pt-28  md:flex-row md:items-start md:justify-center ">
       <Card className="h-fit w-full max-w-xs">
@@ -46,7 +50,49 @@ function Profiles() {
         aria-label="Tabs with underline"
         style="underline"
       >
-        <Tabs.Item title="Profile">Tickets</Tabs.Item>
+        <Tabs.Item title="Profile">
+          <div className="space-y-5">
+            {events.data.map((event) => {
+              return (
+                <div key={event.id}>
+                  <Link
+                    href="/event/[id]"
+                    as={`/event/${event.id}`}
+                    legacyBehavior
+                  >
+                    <a className="flex flex-col items-center rounded-lg border bg-white shadow-md hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:max-w-xl md:flex-row">
+                      <div className="m-2   shadow-md">
+                        <QRCode
+                          className="h-28 w-28  "
+                          value={`TICKET-${event.regId}`}
+                          viewBox={`0 0 256 256`}
+                        />
+                        <div className="w-full bg-white  text-center font-bold text-gray-900">
+                          TICKET-{event.regId}
+                        </div>
+                      </div>
+                      <div className="flex flex-col justify-between p-4 leading-normal">
+                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                          {event.title}
+                        </h5>
+                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                          {event.description}
+                        </p>
+                        <div className="flex items-center">
+                          <div className="flex items-center">
+                            <span className="text-sm font-medium text-gray-900 dark:text-white">
+                              {event.date.toDateString()}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+        </Tabs.Item>
         <Tabs.Item title="Upcoming Events"></Tabs.Item>
       </Tabs.Group>
     </div>
