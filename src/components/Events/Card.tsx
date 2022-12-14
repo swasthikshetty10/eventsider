@@ -22,7 +22,12 @@ function Card(props: any) {
         </a>
         <p>
           <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            {props.date.toString()}
+            {props.date.toDateString() +
+              ", " +
+              props.date.toLocaleTimeString("en-US", {
+                hour: "numeric",
+                hour12: true,
+              })}
           </span>
         </p>
         <p className="mt-2 text-gray-600 dark:text-gray-400">

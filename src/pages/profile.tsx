@@ -1,4 +1,4 @@
-import { Card, Dropdown, Tabs } from "flowbite-react";
+import { Card, Tabs } from "flowbite-react";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
@@ -50,7 +50,7 @@ function Profiles() {
         aria-label="Tabs with underline"
         style="underline"
       >
-        <Tabs.Item title="Profile">
+        <Tabs.Item title="Profile" className="md:max-h-[70vh]">
           <div className="space-y-5">
             {events.data.map((event) => {
               return (

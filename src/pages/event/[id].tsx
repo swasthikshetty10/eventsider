@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
-import { BsFillCalendarFill } from "react-icons/bs";
+import { BsFillCalendarFill, BsFillClockFill } from "react-icons/bs";
 import { Button, Card } from "flowbite-react";
 import Image from "next/image";
 import EventsModal from "../../components/Modal/EventsModal";
@@ -32,18 +32,19 @@ export default function Events() {
               {event.data.description}
             </p>
             <div>
-              <a
-                href="#"
-                className="bg-primary-700 hover:bg-primary-800text-xl  mr-3 inline-flex items-center  justify-center gap-1 rounded-lg px-5 py-3 text-center text-base font-medium  text-opacity-75 focus:ring-4"
-              >
+              <span className="bg-primary-700 hover:bg-primary-800text-xl  mr-3 inline-flex items-center  justify-center gap-1 rounded-lg px-5 py-3 text-center text-base font-medium  text-opacity-75 focus:ring-4">
                 <HiOutlineLocationMarker /> {event.data.location}
-              </a>
-              <a
-                href="#"
-                className="bg-primary-700 hover:bg-primary-800text-xl  mr-3 inline-flex items-center  justify-center gap-1 rounded-lg px-5 py-3 text-center text-base font-medium  text-opacity-75 focus:ring-4"
-              >
-                <BsFillCalendarFill /> {event.data.date.getUTCDay()}
-              </a>
+              </span>
+              <span className="bg-primary-700 hover:bg-primary-800text-xl  mr-3 inline-flex items-center  justify-center gap-1 rounded-lg px-5 py-3 text-center text-base font-medium  text-opacity-75 focus:ring-4">
+                <BsFillCalendarFill /> {event.data.date.toDateString()}
+              </span>
+              <span className="bg-primary-700 hover:bg-primary-800text-xl  mr-3 inline-flex items-center  justify-center gap-1 rounded-lg px-5 py-3 text-center text-base font-medium  text-opacity-75 focus:ring-4">
+                <BsFillClockFill />{" "}
+                {event.data.date.toLocaleTimeString("en-US", {
+                  hour: "numeric",
+                  hour12: true,
+                })}
+              </span>
             </div>
           </div>
 

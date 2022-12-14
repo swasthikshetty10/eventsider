@@ -48,8 +48,13 @@ function NavBAr() {
                 {user.data?.email || ""}
               </span>
             </Dropdown.Header>
-            <Dropdown.Item>My Tickets</Dropdown.Item>
-            <Dropdown.Item>Settings</Dropdown.Item>
+            <Dropdown.Item>
+              <Link href="/profile"> My Tickets</Link>
+            </Dropdown.Item>
+            <Dropdown.Item>
+              <Link href="/profile"> Profile</Link>
+            </Dropdown.Item>
+
             <Dropdown.Divider />
             <Dropdown.Item
               onClick={async () => {
@@ -88,7 +93,7 @@ function NavBAr() {
         <Link href="/">Home</Link>
         <Link href="/events">Events</Link>
         <Link href="/about">About</Link>
-        <Link href="/tickets">Tickets</Link>
+        <Link href="/profile">Tickets</Link>
         <Link href="/offers">Offers</Link>
       </Navbar.Collapse>
     </Navbar>
