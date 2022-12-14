@@ -17,19 +17,22 @@ function NavBAr() {
       fluid={true}
       rounded={true}
     >
-      <Link href="/" className="flex items-center gap-2 text-xl font-bold">
+      <Link
+        href="/"
+        className="xs:text-xl flex items-center gap-2 text-lg font-bold"
+      >
         <Image
           src="/images/logo.svg"
           width={100}
           height={100}
-          className="h-10 w-10 group-hover:animate-pulse lg:h-12 lg:w-12"
+          className="xs:h-10 xs:w-10 h-8 w-8 group-hover:animate-pulse lg:h-12 lg:w-12"
           alt="Eventsider Logo"
         />
         <span className="self-center whitespace-nowrap   dark:text-white">
           Eventsider
         </span>
       </Link>
-      <div className="flex items-center gap-2 md:order-2">
+      <div className="xs:gap-2 flex items-center gap-1 md:order-2">
         {user.data ? (
           <Dropdown
             arrowIcon={false}
@@ -72,17 +75,16 @@ function NavBAr() {
                 callbackUrl: `${window.location.pathname}/profile`,
               });
             }}
-            className=""
             color="gray"
           >
-            <span className="text-mds flex items-center gap-1">
+            <span className="text-md flex items-center gap-1">
               <FcGoogle /> SignIn
             </span>
           </Button>
         )}
 
         <button
-          className="p-2 text-3xl text-yellow-300 dark:text-white "
+          className="xs:text-3xl p-2 text-2xl text-yellow-300 dark:text-white "
           onClick={() => setDark(!dark)}
         >
           {!dark ? <FiSun /> : <FiMoon />}
@@ -90,11 +92,40 @@ function NavBAr() {
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <Link href="/">Home</Link>
-        <Link href="/events">Events</Link>
-        <Link href="/about">About</Link>
-        <Link href="/profile">Tickets</Link>
-        <Link href="/offers">Offers</Link>
+        <Link
+          className="block border-b border-gray-100 py-2 pr-4 pl-3 text-gray-700  hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
+          href="/"
+        >
+          Home
+        </Link>
+
+        <Link
+          className="block border-b border-gray-100 py-2 pr-4 pl-3 text-gray-700  hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
+          href="/"
+        >
+          Events
+        </Link>
+
+        <Link
+          className="block border-b border-gray-100 py-2 pr-4 pl-3 text-gray-700  hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
+          href="/"
+        >
+          About
+        </Link>
+
+        <Link
+          className="block border-b border-gray-100 py-2 pr-4 pl-3 text-gray-700  hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
+          href="/profile"
+        >
+          Tickets
+        </Link>
+
+        <Link
+          className="block border-b border-gray-100 py-2 pr-4 pl-3 text-gray-700  hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
+          href="/offers"
+        >
+          Offers
+        </Link>
       </Navbar.Collapse>
     </Navbar>
   );

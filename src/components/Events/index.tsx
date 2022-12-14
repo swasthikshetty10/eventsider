@@ -7,7 +7,7 @@ function Events() {
   if (events.isLoading) return <div>Loading...</div>;
   if (!events.data) return <div>No events found</div>;
   return (
-    <div className="mx-auto max-w-screen-2xl p-5">
+    <div className="mx-auto max-w-screen-2xl p-2 md:p-5">
       <h1 className="text my-14 text-center text-6xl font-bold ">Events</h1>
       <div className="lg:grid-clos-3  grid grid-cols-1 items-center gap-5 md:grid-cols-2  md:gap-10 2xl:grid-cols-3">
         {events?.data.map(

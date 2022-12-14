@@ -13,7 +13,6 @@ function Profiles() {
   if (!user.data || !events.data) {
     return <div>loading</div>;
   }
-  console.log(events.data);
   return (
     <div className="flex min-h-screen flex-col items-center justify-start gap-5 p-5 pt-28  md:flex-row md:items-start md:justify-center ">
       <Card className="h-fit w-full max-w-xs">
@@ -79,9 +78,15 @@ function Profiles() {
                           {event.description}
                         </p>
                         <div className="flex items-center">
-                          <div className="flex items-center">
+                          <div className="flex items-center gap-5">
                             <span className="text-sm font-medium text-gray-900 dark:text-white">
                               {event.date.toDateString()}
+                            </span>
+                            <span className="text-sm font-medium text-gray-900 dark:text-white">
+                              {event.date.toLocaleTimeString("en-US", {
+                                hour: "numeric",
+                                hour12: true,
+                              })}
                             </span>
                           </div>
                         </div>

@@ -26,7 +26,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
       dark
         ? "dark bg-gradient-to-br from-gray-800 via-slate-800 to-slate-900  text-gray-200 "
         : " bg-gradient-to-br from-pink-100 via-blue-50 to-sky-100 text-gray-800 "
-    } font-sans`;
+    } font-sans min-h-screen`;
   }, [dark]);
   return (
     <DarkLightContext.Provider value={[dark, setDark]}>
