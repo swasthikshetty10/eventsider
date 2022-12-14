@@ -5,19 +5,25 @@ import { trpc } from "../../utils/trpc";
 import { Button } from "flowbite-react";
 import RegisteredUsers from "../Modal/RegisteredUsers";
 import { truncateString } from "../../utils/helpers";
-
+import { MdDeleteForever } from "react-icons/md";
 function MyEvents() {
   const [modal, setModal] = React.useState(false);
+  const mutation = trpc.events.deleteEvent.useMutation();
   const events = trpc.events.getAllEventsByOrganizer.useQuery();
+  const utlis = trpc.useContext();
   if (!events.data) {
     return <div>loading</div>;
   }
   return (
     <div className="h-fit space-y-5 overflow-y-auto  md:max-h-[70vh]">
       {events.data.map((event) => {
+        const deleteHandler = async () => {
+          await mutation.mutateAsync(event.id);
+          utlis.events.getAllEventsByOrganizer.invalidate();
+        };
         return (
           <div key={event.id}>
-            <EventCard event={event} />
+            <EventCard onDelete={deleteHandler} event={event} />
           </div>
         );
       })}
@@ -26,10 +32,17 @@ function MyEvents() {
 }
 
 export default MyEvents;
-const EventCard = ({ event }: any) => {
+const EventCard = ({ event, onDelete }: any) => {
   const [modal, setModal] = React.useState(false);
   return (
-    <div className="flex flex-col items-center overflow-hidden rounded-lg border bg-white shadow-md hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:max-w-xl md:flex-row">
+    <div className="relative flex flex-col items-center overflow-hidden rounded-lg border bg-white shadow-md hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:max-w-xl md:flex-row">
+      <button
+        className="absolute top-5 right-5 text-2xl text-red-500"
+        color={"gray"}
+        onClick={onDelete}
+      >
+        <MdDeleteForever />
+      </button>
       <Image
         className="max-h-48  max-w-xs"
         width={256}

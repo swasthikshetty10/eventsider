@@ -90,4 +90,25 @@ export const eventsRouter = router({
       });
       return registered.map((r) => r.user);
     }),
+  deleteEvent: protectedProcedure
+    .input(z.number())
+    .mutation(async ({ ctx, input }) => {
+      // check if the user is the organiser of the event
+      const organiser = await ctx.prisma.organiser.findFirst({
+        where: {
+          userId: ctx.session?.user.id || "",
+          eventId: input,
+        },
+      });
+      if (!organiser) {
+        throw new Error("You are not the organiser of this event");
+      }
+
+      const event = await ctx.prisma.events.delete({
+        where: {
+          id: input,
+        },
+      });
+      return event;
+    }),
 });
