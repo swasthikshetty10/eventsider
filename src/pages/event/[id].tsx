@@ -95,12 +95,17 @@ export default function Events() {
 const EventCard = () => {
   return (
     <Card>
-      <h5 className="dark: mb-2 text-3xl font-bold ">
-        Work fast from anywhere
-      </h5>
+      <h5 className="dark: mb-2 text-3xl font-bold ">Rules and Regulations</h5>
       <p className="mb-5 text-base text-gray-500 dark:text-gray-400 sm:text-lg">
-        Stay up to date and move work forward with Flowbite on iOS & Android.
-        Download the app today.
+        All participants must be 18+ years of age, provide valid ID, and
+        register online prior to the event. Payment must be made in full at the
+        time of registration, and all registrations are non-refundable and
+        non-transferable. Participants must sign a waiver and release of
+        liability and adhere to all rules and regulations set forth by the event
+        organizer. The event organizer reserves the right to refuse, cancel,
+        modify, or cancel any event at any time. Participants also agree to
+        allow the event organizer to use their name, likeness, and photograph
+        for promotional purposes.
       </p>
       <List />
     </Card>
@@ -111,39 +116,21 @@ const List = () => {
   return (
     <ol className="list-inside list-decimal space-y-4 text-gray-500 dark:text-gray-400">
       <li>
-        List item one
+        Rules
         <ul className="mt-2 list-inside list-disc space-y-1 pl-5">
           <li>
-            You might feel like you are being really &quote;organizedQ&uote; o
+            All participants must provide a valid form of identification at the
+            time of registration.
           </li>
           <li>
-            Nested navigation in UIs is a bad idea too, keep things as flat as
-            possible.
+            Registration is open to all participants, regardless of race,
+            religion, gender, or sexual orientation.
           </li>
           <li>
-            Nesting tons of folders in your source code is also not helpful.
+            All registrations must be completed online prior to the event.
           </li>
-        </ul>
-      </li>
-      <li>
-        List item two
-        <ul className="mt-2 list-inside list-disc space-y-1 pl-5">
-          <li>
-            I&apos;m not sure if we&apos;ll bother styling more than two levels
-            deep.
-          </li>
-          <li>
-            Two is already too much, three is guaranteed to be a bad idea.
-          </li>
-          <li>If you nest four levels deep you belong in prison.</li>
-        </ul>
-      </li>
-      <li>
-        List item three
-        <ul className="mt-2 list-inside list-disc space-y-1 pl-5">
-          <li>Again please don&apos;t nest lists if you want</li>
-          <li>Nobody wants to look at this.</li>
-          <li>I&apos;m upset that we even have to bother styling this.</li>
+
+          <li>6. All registrations are non-refundable and non-transferable.</li>
         </ul>
       </li>
     </ol>

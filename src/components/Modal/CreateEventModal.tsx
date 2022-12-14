@@ -4,7 +4,7 @@ import { trpc } from "../../utils/trpc";
 
 function CreateEvents({ showModal }: { showModal: (arg0: boolean) => void }) {
   const mutation = trpc.events.createEvent.useMutation();
-  const utitls = trpc.events.getAllEventsByOrganizer.useQuery();
+  const utitls = trpc.useContext();
   return (
     <div className="fixed top-0 left-0 right-0 z-[999] flex h-screen w-screen items-center justify-center overflow-x-hidden bg-gray-900 bg-opacity-50   p-5 dark:bg-opacity-80">
       <Card className="relative -m-5 h-fit max-h-[75vh] w-full max-w-2xl space-y-2 overflow-auto">
@@ -45,7 +45,7 @@ function CreateEvents({ showModal }: { showModal: (arg0: boolean) => void }) {
               location: e.target.location.value,
             };
             mutation.mutate(data);
-            utitls.refetch();
+            utitls.events.getAllEventsByOrganizer.invalidate();
             showModal(false);
           }}
         />

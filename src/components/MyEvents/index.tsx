@@ -31,7 +31,7 @@ const EventCard = ({ event }: any) => {
   return (
     <div className="flex flex-col items-center overflow-hidden rounded-lg border bg-white shadow-md hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:max-w-xl md:flex-row">
       <Image
-        className="h-48 w-auto"
+        className="max-h-48  max-w-xs"
         width={256}
         height={256}
         src={event.banner}
