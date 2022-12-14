@@ -67,7 +67,7 @@ model VerificationToken {
 model Events {
   id              Int            @id @default(autoincrement())
   title           String
-  description     String
+  description     String         @db.Text
   date            DateTime
   location        String
   banner          String

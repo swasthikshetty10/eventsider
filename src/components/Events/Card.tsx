@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { HiOutlineLocationMarker } from "react-icons/hi";
+import { truncateString } from "../../utils/helpers";
 function Card(props: any) {
   return (
     <div className=" flex h-full flex-col items-center justify-between rounded-lg bg-slate-200/60 shadow-md  backdrop-blur-lg transition delay-75 duration-300 ease-in-out hover:scale-105 hover:shadow-2xl dark:border-gray-400 dark:bg-gray-700/60">
@@ -31,7 +32,7 @@ function Card(props: any) {
           </span>
         </p>
         <p className="mt-2 text-gray-600 dark:text-gray-400">
-          {props.description}
+          {truncateString(props.description, 75)}
         </p>
         <a className="mt-2 inline-flex items-center gap-2 text-gray-600 dark:text-gray-400">
           <HiOutlineLocationMarker />

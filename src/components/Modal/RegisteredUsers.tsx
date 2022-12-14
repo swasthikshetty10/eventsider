@@ -1,4 +1,5 @@
-import { Accordion, Avatar, Card } from "flowbite-react";
+import { Card } from "flowbite-react";
+import Image from "next/image";
 import React from "react";
 import { trpc } from "../../utils/trpc";
 
@@ -10,11 +11,16 @@ function RegisteredUsers({
   showModal: (arg0: boolean) => void;
 }) {
   const users = trpc.events.getAllRegisteredUsersByEvent.useQuery(eventId);
-  if (!users.data) return <div>loading</div>;
+  if (!users.data)
+    return (
+      <div className="fixed top-0 left-0 right-0 z-[999] flex h-screen w-screen items-center justify-center overflow-x-hidden bg-gray-900 bg-opacity-50   p-5 dark:bg-opacity-80">
+        loading
+      </div>
+    );
 
   return (
     <div className="fixed top-0 left-0 right-0 z-[999] flex h-screen w-screen items-center justify-center overflow-x-hidden bg-gray-900 bg-opacity-50   p-5 dark:bg-opacity-80">
-      <Card className="relative -m-5 h-fit max-h-[75vh] w-full max-w-3xl overflow-auto">
+      <Card className="relative -m-5 h-fit max-h-[75vh] w-full max-w-3xl space-y-2 overflow-auto">
         <button
           onClick={() => {
             showModal(false);
@@ -43,16 +49,18 @@ function RegisteredUsers({
         {users.data.length === 0 ? (
           <div>No users registered</div>
         ) : (
-          <div>
+          <>
             {users.data?.map((user, index) => (
               <div key={user.id}>
                 <div className="flex w-full items-center justify-between">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <Avatar
-                        className="h-10 w-10 rounded-full"
-                        img={user?.image || ""}
+                      <Image
+                        className="h-10 w-10 rounded-lg"
+                        src={user?.image || ""}
                         alt=""
+                        width={100}
+                        height={100}
                       />
                     </div>
                     <div className="ml-4">
@@ -68,7 +76,7 @@ function RegisteredUsers({
                 <hr className="mt-2 opacity-50"></hr>
               </div>
             ))}
-          </div>
+          </>
         )}
       </Card>
     </div>

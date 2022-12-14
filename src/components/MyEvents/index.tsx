@@ -4,6 +4,7 @@ import Image from "next/image";
 import { trpc } from "../../utils/trpc";
 import { Button } from "flowbite-react";
 import RegisteredUsers from "../Modal/RegisteredUsers";
+import { truncateString } from "../../utils/helpers";
 
 function MyEvents() {
   const [modal, setModal] = React.useState(false);
@@ -41,7 +42,7 @@ const EventCard = ({ event }: any) => {
           {event.title}
         </h5>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          {event.description}
+          {truncateString(event.description, 75)}
         </p>
         <div className="flex items-center">
           <div className="flex items-center gap-5">
@@ -64,6 +65,8 @@ const EventCard = ({ event }: any) => {
             onClick={() => {
               setModal(true);
             }}
+            outline={true}
+            gradientDuoTone="purpleToBlue"
           >
             Registrations
           </Button>

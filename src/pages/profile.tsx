@@ -1,13 +1,15 @@
-import { Card, Tabs } from "flowbite-react";
+import { Button, Card, Tabs } from "flowbite-react";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { trpc } from "../utils/trpc";
 import Tickets from "../components/Tickets";
 import MyEvents from "../components/MyEvents";
+import CreateEvents from "../components/Modal/CreateEventModal";
 function Profiles() {
   const user = trpc.auth.getUserData.useQuery();
+  const [modal, setModal] = useState(false);
   const utils = trpc.useContext();
   if (!user.data) {
     return <div>loading</div>;
@@ -52,9 +54,19 @@ function Profiles() {
           <Tickets />
         </Tabs.Item>
         <Tabs.Item title="My Events">
+          <div className="mb-5 flex w-full items-center">
+            <Button
+              outline={true}
+              gradientDuoTone="cyanToBlue"
+              onClick={() => setModal(true)}
+            >
+              Post Event
+            </Button>
+          </div>
           <MyEvents />
         </Tabs.Item>
       </Tabs.Group>
+      {modal && <CreateEvents showModal={setModal} />}
     </div>
   );
 }
