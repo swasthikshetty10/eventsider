@@ -56,11 +56,10 @@ const Home: NextPage = () => {
             </h2>
             <p className="inline-flex items-center gap-2  text-center text-sm opacity-80 lg:text-left lg:text-lg">
               <span>
-                Welcome to Register Events! The online platform to easily find
-                and register for your favorite events. Whether you’re looking
-                for a music festival, conference, or something else, Register
-                Events is the perfect place to search and sign up for events
-                near you
+                Welcome to Eventsider! The online platform to easily find and
+                register for your favorite events. Whether you’re looking for a
+                music festival, conference, or something else, Eventsider is the
+                perfect place to search and sign up for events near you
               </span>
             </p>
             <div className="w-full lg:text-left">

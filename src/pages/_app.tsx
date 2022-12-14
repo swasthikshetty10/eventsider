@@ -8,6 +8,7 @@ import "../styles/globals.css";
 import NavBar from "../components/NavBar";
 import { DarkLightContext } from "../context/DarkModeContext";
 import { useEffect, useState } from "react";
+import Footer from "../components/Footer";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -34,6 +35,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <div>
           <NavBar />
           <Component {...pageProps} />
+          <Footer />
         </div>
       </SessionProvider>
     </DarkLightContext.Provider>

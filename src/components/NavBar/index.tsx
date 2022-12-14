@@ -51,12 +51,14 @@ function NavBAr() {
                 {user.data?.email || ""}
               </span>
             </Dropdown.Header>
-            <Dropdown.Item>
-              <Link href="/profile"> My Tickets</Link>
-            </Dropdown.Item>
-            <Dropdown.Item>
-              <Link href="/profile"> Profile</Link>
-            </Dropdown.Item>
+            <Link href="/profile">
+              <Dropdown.Item>
+                <Link href="/profile"> My Tickets</Link>
+              </Dropdown.Item>
+            </Link>
+            <Link href="/profile">
+              <Dropdown.Item>Profile</Dropdown.Item>
+            </Link>
 
             <Dropdown.Divider />
             <Dropdown.Item

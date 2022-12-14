@@ -60,7 +60,7 @@ function Profiles() {
                     legacyBehavior
                   >
                     <a className="flex flex-col items-center rounded-lg border bg-white shadow-md hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:max-w-xl md:flex-row">
-                      <div className="m-2   shadow-md">
+                      <div className="m-2 bg-white px-2 pt-2  shadow-md">
                         <QRCode
                           className="h-28 w-28  "
                           value={`TICKET-${event.regId}`}

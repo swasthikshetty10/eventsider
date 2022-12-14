@@ -106,9 +106,9 @@ function EventsModal({ showModal, modal, id, fee }: any) {
               </div>
             </div>
           </div>
-          <div className="flex justify-between ">
+          <div className="xs:mt-0 mt-1 flex flex-wrap justify-between gap-1 ">
             <div className="flex items-center gap-1">
-              <span className="text-md  ">Total fees </span>
+              <span className="text-md whitespace-nowrap ">Total fees </span>
               <span className="text-2xl font-bold"> ₹{fee}</span>
             </div>
             <div className="flex gap-3">
@@ -117,6 +117,7 @@ function EventsModal({ showModal, modal, id, fee }: any) {
                   makePayment(id);
                 }}
                 disabled={!tnc}
+                className="whitespace-nowrap"
               >
                 Pay Now
               </Button>
