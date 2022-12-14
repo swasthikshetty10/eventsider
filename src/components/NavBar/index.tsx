@@ -19,29 +19,31 @@ function NavBAr() {
     >
       <Link
         href="/"
-        className="xs:text-xl flex items-center gap-2 text-lg font-bold"
+        className="flex items-center gap-2 text-lg font-bold sm:text-xl"
       >
         <Image
           src="/images/logo.svg"
           width={100}
           height={100}
-          className="xs:h-10 xs:w-10 h-8 w-8 group-hover:animate-pulse lg:h-12 lg:w-12"
+          className="h-8 w-8 group-hover:animate-pulse sm:h-10 sm:w-10 lg:h-12 lg:w-12"
           alt="Eventsider Logo"
         />
         <span className="self-center whitespace-nowrap   dark:text-white">
           Eventsider
         </span>
       </Link>
-      <div className="xs:gap-2 flex items-center gap-1 md:order-2">
+      <div className="flex items-center gap-1 sm:gap-2 md:order-2">
         {user.data ? (
           <Dropdown
             arrowIcon={false}
             inline={true}
             label={
-              <Avatar
-                alt="User settings"
-                img={user.data?.image || undefined}
-                rounded={true}
+              <Image
+                height={100}
+                width={100}
+                alt="User "
+                src={user.data?.image || ""}
+                className="h-8 w-8 rounded-full sm:h-10 sm:w-10"
               />
             }
           >
@@ -63,7 +65,10 @@ function NavBAr() {
             <Dropdown.Divider />
             <Dropdown.Item
               onClick={async () => {
-                await signOut({ redirect: true });
+                await signOut({
+                  redirect: true,
+                  callbackUrl: `${window.location.origin}`,
+                });
                 utils.auth.getUserData.invalidate();
               }}
             >
@@ -74,7 +79,7 @@ function NavBAr() {
           <Button
             onClick={() => {
               signIn("google", {
-                callbackUrl: `${window.location.pathname}/profile`,
+                callbackUrl: `${window.location.origin}/profile`,
               });
             }}
             color="gray"
@@ -86,7 +91,7 @@ function NavBAr() {
         )}
 
         <button
-          className="xs:text-3xl p-2 text-2xl text-yellow-300 dark:text-white "
+          className="p-2 text-2xl text-yellow-300 dark:text-white sm:text-3xl "
           onClick={() => setDark(!dark)}
         >
           {!dark ? <FiSun /> : <FiMoon />}
